@@ -1,4 +1,5 @@
 import Sidebar from "./components/Sidebar";
+import Statusbox from "./components/Statusbox";
 
 function App() {
   return (
@@ -25,58 +26,13 @@ function App() {
         </header>
 
         <div className="board">
-          <div className="board__column">
-            <h2 className="board__column-title">To do</h2>
-            <div className="task-list">
-              <div className="task-card">
-                <h3 className="task-card__title">
-                  Create pipeline with Github Actions
-                </h3>
-                <div className="task-card__tags">
-                  <span className="tag tag--infra">Infra</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Statusbox status={"To-do"} />
 
-          <div className="board__column">
-            <h2 className="board__column-title">In progress</h2>
-            <div className="task-list">
-              <div className="task-card">
-                <h3 className="task-card__title">Set up Strapi on Render</h3>
-                <div className="task-card__tags">
-                  <span className="tag tag--infra">Infra</span>
-                  <span className="tag tag--backend">Back-end</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Statusbox status={"Backlog"} />
 
-          <div className="board__column">
-            <h2 className="board__column-title">Ready for review</h2>
-            <div className="task-list">
-              <div className="task-card">
-                <h3 className="task-card__title">
-                  Add formatting with Prettier
-                </h3>
-                <div className="task-card__tags">
-                  <span className="tag tag--frontend">Front-end</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Statusbox status={"Done"} />
 
-          <div className="board__column">
-            <h2 className="board__column-title">Done</h2>
-            <div className="task-list">
-              <div className="task-card">
-                <h3 className="task-card__title">Initialize Git repository</h3>
-                <div className="task-card__tags">
-                  <span className="tag tag--infra">Infra</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Statusbox status={"Ready for review"} />
         </div>
       </main>
     </div>
