@@ -1,6 +1,7 @@
 import Sidebar from "./components/Sidebar";
 import Statusbox from "./components/Statusbox";
 
+
 function App() {
   return (
     <div className="app">
