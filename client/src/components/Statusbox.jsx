@@ -20,7 +20,7 @@ function Statusbox({ status }) {
 
   useEffect(() => {
     fetch(
-      `${API_URL}/tasks?filters[categorie][statusName][$eq]=${status}&pagination[pageSize]=${pageSize}&pagination[page]=${currentPage}`,
+      `${API_URL}/tasks`,
       {
         headers: {
           Authorization: `Bearer ${API_TOKEN}`,

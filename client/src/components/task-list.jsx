@@ -3,7 +3,7 @@ export function TaskList({ tasks }) {
     <table className="task-table">
       <tbody>
         {tasks.map((task) => (
-          <tr key={task.id}>
+          <tr>
             <td>{task.taskName}</td>
           </tr>
         ))}
