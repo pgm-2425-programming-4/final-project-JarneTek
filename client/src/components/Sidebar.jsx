@@ -1,5 +1,9 @@
 export default function Sidebar() {
+<<<<<<< HEAD
   return (
+=======
+  return (  
+>>>>>>> develop
     <div className="sidebar">
       <div className="sidebar__header">
         <h1 className="sidebar__title">Projects</h1>

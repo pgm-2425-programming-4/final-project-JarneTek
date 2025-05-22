@@ -15,7 +15,7 @@ function Statusbox({ status }) {
 
   function handlePageSizeChange(event) {
     setPageSize(Number(event.target.value));
-    setCurrentPage(1); // Reset to first page when changing page size
+    setCurrentPage(1); 
   }
 
   useEffect(() => {
