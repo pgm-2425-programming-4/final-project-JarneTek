@@ -1,97 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project Management Board</title>
-    <link rel="stylesheet" href="client/src/index.css">
-</head>
-
-<body class="app">
-    <aside class="sidebar">
-        <div class="sidebar__header">
-            <h1 class="sidebar__title">Projects</h1>
-        </div>
-        <nav class="sidebar__nav">
-            <ul class="project-list">
-                <li class="project-list__item project-list__item--active">
-                    <a href="#" class="project-list__link">Marketing Website</a>
-                </li>
-                <li class="project-list__item">
-                    <a href="#" class="project-list__link">Mobile App</a>
-                </li>
-                <li class="project-list__item">
-                    <a href="#" class="project-list__link">E-commerce Platform</a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
-
-    <main class="main">
-        <header class="header">
-            <div class="header__content">
-                <div class="search">
-                    <input type="text" class="search__input" placeholder="Search tasks...">
-                </div>
-                <div class="header__actions">
-                    <button class="button button--primary">Add new task</button>
-                    <button class="button button--secondary">View backlog</button>
-                </div>
-            </div>
-        </header>
-
-        <div class="board">
-            <div class="board__column">
-                <h2 class="board__column-title">To do</h2>
-                <div class="task-list">
-                    <div class="task-card">
-                        <h3 class="task-card__title">Create pipeline with Github Actions</h3>
-                        <div class="task-card__tags">
-                            <span class="tag tag--infra">Infra</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="board__column">
-                <h2 class="board__column-title">In progress</h2>
-                <div class="task-list">
-                    <div class="task-card">
-                        <h3 class="task-card__title">Set up Strapi on Render</h3>
-                        <div class="task-card__tags">
-                            <span class="tag tag--infra">Infra</span>
-                            <span class="tag tag--backend">Back-end</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="board__column">
-                <h2 class="board__column-title">Ready for review</h2>
-                <div class="task-list">
-                    <div class="task-card">
-                        <h3 class="task-card__title">Add formatting with Prettier</h3>
-                        <div class="task-card__tags">
-                            <span class="tag tag--frontend">Front-end</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="board__column">
-                <h2 class="board__column-title">Done</h2>
-                <div class="task-list">
-                    <div class="task-card">
-                        <h3 class="task-card__title">Initialize Git repository</h3>
-                        <div class="task-card__tags">
-                            <span class="tag tag--infra">Infra</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-</body>
-
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="client/src/main.jsx"></script>
+  </body>
 </html>
