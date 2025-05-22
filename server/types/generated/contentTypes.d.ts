@@ -373,48 +373,29 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-<<<<<<< HEAD
+// Only keeping the "Status" model from "main" and removing the "Categorie" model from "develop"
 export interface ApiStatusStatus extends Struct.CollectionTypeSchema {
   collectionName: 'statuses';
   info: {
     displayName: 'Status';
     pluralName: 'statuses';
     singularName: 'status';
-=======
-export interface ApiCategorieCategorie extends Struct.CollectionTypeSchema {
-  collectionName: 'categories';
-  info: {
-    displayName: 'Categorie';
-    pluralName: 'categories';
-    singularName: 'categorie';
->>>>>>> develop
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-<<<<<<< HEAD
-=======
-    categorieName: Schema.Attribute.String & Schema.Attribute.Required;
->>>>>>> develop
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-<<<<<<< HEAD
       'api::status.status'
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     statusName: Schema.Attribute.String;
-=======
-      'api::categorie.categorie'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
->>>>>>> develop
     tasks: Schema.Attribute.Relation<'oneToMany', 'api::task.task'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -434,14 +415,7 @@ export interface ApiTaskTask extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-<<<<<<< HEAD
     categorie: Schema.Attribute.Relation<'manyToOne', 'api::status.status'>;
-=======
-    category: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::categorie.categorie'
-    >;
->>>>>>> develop
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -965,11 +939,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-<<<<<<< HEAD
       'api::status.status': ApiStatusStatus;
-=======
-      'api::categorie.categorie': ApiCategorieCategorie;
->>>>>>> develop
       'api::task.task': ApiTaskTask;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

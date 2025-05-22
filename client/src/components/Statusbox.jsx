@@ -34,6 +34,7 @@ function Statusbox({ status }) {
       });
   }, [currentPage, status, pageSize]);
 
+
   return (
     <div className="board__column">
       <h2 className="board__column-title"> {status}</h2>
