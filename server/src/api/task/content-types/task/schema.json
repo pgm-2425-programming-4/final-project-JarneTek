@@ -15,10 +15,10 @@
       "type": "string",
       "required": true
     },
-    "category": {
+    "categorie": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::categorie.categorie",
+      "target": "api::status.status",
       "inversedBy": "tasks"
     }
   }

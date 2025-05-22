@@ -373,28 +373,29 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiCategorieCategorie extends Struct.CollectionTypeSchema {
-  collectionName: 'categories';
+// Only keeping the "Status" model from "main" and removing the "Categorie" model from "develop"
+export interface ApiStatusStatus extends Struct.CollectionTypeSchema {
+  collectionName: 'statuses';
   info: {
-    displayName: 'Categorie';
-    pluralName: 'categories';
-    singularName: 'categorie';
+    displayName: 'Status';
+    pluralName: 'statuses';
+    singularName: 'status';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    categorieName: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::categorie.categorie'
+      'api::status.status'
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    statusName: Schema.Attribute.String;
     tasks: Schema.Attribute.Relation<'oneToMany', 'api::task.task'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -414,10 +415,7 @@ export interface ApiTaskTask extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    category: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::categorie.categorie'
-    >;
+    categorie: Schema.Attribute.Relation<'manyToOne', 'api::status.status'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -941,7 +939,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::categorie.categorie': ApiCategorieCategorie;
+      'api::status.status': ApiStatusStatus;
       'api::task.task': ApiTaskTask;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
