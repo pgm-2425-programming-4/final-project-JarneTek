@@ -68,7 +68,7 @@ server/*.pid
 
 
 
-server/.tmp
+server/.tmp/data.db
 server/*.log
 server/*.sql
 server/*.sqlite
