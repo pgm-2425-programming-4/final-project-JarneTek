@@ -1,41 +1,58 @@
-import Sidebar from "./components/Sidebar";
-import Statusbox from "./components/Statusbox";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Board from "./components/Board";
+import Backlog from "./components/Backlog";
+import PageNavigation from "./components/PageNavigation";
 
 function App() {
   return (
-    <div className="app">
-      <aside className="sidebar">
-        <Sidebar />
-      </aside>
-
-      <main className="main">
-        <header className="header">
-          <div className="header__content">
-            <div className="search">
-              <input
-                type="text"
-                className="search__input"
-                placeholder="Search tasks..."
-              />
-            </div>
-            <div className="header__actions">
-              <button className="button button--primary">Add new task</button>
-              <button className="button button--secondary">View backlog</button>
-            </div>
+    <Router>
+      <div className="app">
+        <aside className="sidebar">
+          <div className="sidebar__header">
+            <h1 className="sidebar__title">Project Dashboard</h1>
           </div>
-        </header>
+          <nav>
+            <ul className="project-list">
+              <li className="project-list__item project-list__item--active">
+                <a href="#" className="project-list__link">
+                  Current Project
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </aside>
 
-        <div className="board">
-          <Statusbox status={"To-do"} />
+        <main className="main">
+          <header className="header">
+            <div className="header__content">
+              <div className="search">
+                <input
+                  type="search"
+                  placeholder="Search tasks..."
+                  className="search__input"
+                />
+              </div>
+              <div className="header__actions">
+                <button className="button button--secondary">Add Task</button>
+                <button className="button button--primary">New Project</button>
+              </div>
+            </div>
+          </header>
 
-          <Statusbox status={"Backlog"} />
+          <div className="page-content">
+            <div style={{ padding: "2rem 2rem 0 2rem" }}>
+              <PageNavigation />
+            </div>
 
-          <Statusbox status={"Done"} />
-
-          <Statusbox status={"Ready for review"} />
-        </div>
-      </main>
-    </div>
+            <Routes>
+              <Route path="/" element={<Board />} />
+              <Route path="/backlog" element={<Backlog />} />
+            </Routes>
+          </div>
+        </main>
+      </div>
+    </Router>
   );
 }
 
