@@ -4,18 +4,20 @@ import { API_URL, API_TOKEN } from "../constants/constants";
 
 function Statusbox({ status, statusId }) {
   const [tasks, setTasks] = useState([]);
-
   useEffect(() => {
     const url = `${API_URL}/tasks?populate=categorie&filters[categorie][id][$eq]=${statusId}`;
-    
-    const fetchOptions = { headers: { Authorization: `Bearer ${API_TOKEN}` } };
-      
+
+    // Only include Authorization header if API_TOKEN exists (production environment)
+    const fetchOptions = API_TOKEN
+      ? { headers: { Authorization: `Bearer ${API_TOKEN}` } }
+      : {};
+
     fetch(url, fetchOptions)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         setTasks(data.data || []);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(`Error fetching tasks for ${status}:`, err);
       });
   }, [statusId, status]);
