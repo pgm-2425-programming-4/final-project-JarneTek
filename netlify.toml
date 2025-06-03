@@ -1,0 +1,19 @@
+[build]
+  # Directory where the build command should be run from
+  base = "client"
+  
+  # Build command (skip linting to avoid build failures)
+  command = "npm run build"
+  
+  # Directory to publish (relative to base)
+  publish = "dist"
+
+# Redirect all routes to index.html for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Node.js version
+[build.environment]
+  NODE_VERSION = "18"
