@@ -1,0 +1,29 @@
+# Project README
+
+## Overzicht
+
+Dit project bestaat uit een front-end applicatie gebouwd met React en Vite. De applicatie is gekoppeld aan een back-end/database die draait via Render.
+
+## Live Demo
+
+Bekijk de front-end applicatie hier:  
+[https://gentle-vacherin-413538.netlify.app/](https://gentle-vacherin-413538.netlify.app/)
+
+## Database opstarten
+
+Voordat je de front-end gebruikt, moet je de database opstarten via Render:
+
+1. Ga naar [https://dashboard.render.com/](https://dashboard.render.com/)
+2. Log in met je account.
+3. Start de database service op als deze nog niet draait.
+
+Zorg ervoor dat de database actief is voordat je de front-end applicatie gebruikt, anders kunnen bepaalde functionaliteiten niet werken.
+
+## Ontwikkeling
+
+- Front-end: React + Vite
+- Back-end/Database: Render
+
+## Contact
+
+Voor vragen of problemen, neem contact op met de projectbeheerder.
