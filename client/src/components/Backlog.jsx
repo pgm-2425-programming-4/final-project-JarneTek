@@ -17,13 +17,10 @@ const Backlog = () => {
   function handlePageChanged(pageNumber) {
     setCurrentPage(pageNumber);
   }
-  
-  useEffect(() => {
+    useEffect(() => {
     const url = `${API_URL}/tasks?populate=categorie&filters[categorie][statusName][$eq]=Backlog&pagination[page]=${currentPage}&pagination[pageSize]=${pageSize}`;
     
-    const fetchOptions = import.meta.env.PROD
-      ? { headers: { Authorization: `Bearer ${API_TOKEN}` } }
-      : {};
+    const fetchOptions = { headers: { Authorization: `Bearer ${API_TOKEN}` } };
     
     fetch(url, fetchOptions)
       .then(response => response.json())

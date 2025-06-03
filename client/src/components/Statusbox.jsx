@@ -8,9 +8,7 @@ function Statusbox({ status, statusId }) {
   useEffect(() => {
     const url = `${API_URL}/tasks?populate=categorie&filters[categorie][id][$eq]=${statusId}`;
     
-    const fetchOptions = import.meta.env.PROD
-      ? { headers: { Authorization: `Bearer ${API_TOKEN}` } }
-      : {};
+    const fetchOptions = { headers: { Authorization: `Bearer ${API_TOKEN}` } };
       
     fetch(url, fetchOptions)
       .then(response => response.json())

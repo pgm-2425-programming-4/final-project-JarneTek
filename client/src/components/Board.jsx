@@ -6,9 +6,7 @@ const Board = () => {
   const [statuses, setStatuses] = useState([]);
 
   useEffect(() => {
-    const fetchOptions = import.meta.env.PROD
-      ? { headers: { Authorization: `Bearer ${API_TOKEN}` } }
-      : {};
+    const fetchOptions = { headers: { Authorization: `Bearer ${API_TOKEN}` } };
       
     fetch(`${API_URL}/statuses`, fetchOptions)
       .then(response => response.json())
