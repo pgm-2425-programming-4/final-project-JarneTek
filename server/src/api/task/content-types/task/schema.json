@@ -20,6 +20,14 @@
       "relation": "manyToOne",
       "target": "api::status.status",
       "inversedBy": "tasks"
+    },
+    "Labels": {
+      "type": "enumeration",
+      "enum": [
+        "Infra",
+        "Documentation",
+        "Back-end"
+      ]
     }
   }
 }

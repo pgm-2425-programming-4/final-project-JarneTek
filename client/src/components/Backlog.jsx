@@ -17,43 +17,27 @@ const Backlog = () => {
   function handlePageChanged(pageNumber) {
     setCurrentPage(pageNumber);
   }
-
   useEffect(() => {
-    fetch(`${API_URL}/tasks`, {
+    const url = `${API_URL}/tasks?populate=categorie&filters[categorie][statusName][$eq]=Backlog&pagination[page]=${currentPage}&pagination[pageSize]=${pageSize}`;
+
+    fetch(url, {
       headers: {
         Authorization: `Bearer ${API_TOKEN}`,
       },
     })
       .then((data) => data.json())
       .then((jsonData) => {
-        console.log("API Response:", jsonData);
-        setTasks(jsonData.data);
-        setPageCount(jsonData.meta.pagination.pageCount);
+        setTasks(jsonData.data || []);
+        setPageCount(jsonData.meta?.pagination?.pageCount || 1);
       });
   }, [currentPage, pageSize]);
 
   return (
     <div className="backlog-page">
       <div className="backlog-content">
+        {" "}
         <h2>Backlog</h2>
-
-        <table className="task-table">
-          <thead>
-            <tr>
-              <td>
-                <strong>Task Name</strong>
-              </td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <TaskList tasks={tasks} />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
+        <TaskList tasks={tasks} />
         <div className="page-size-selector">
           <select value={pageSize} onChange={handlePageSizeChange}>
             {PAGE_SIZE_OPTIONS.map((size) => (
@@ -63,7 +47,6 @@ const Backlog = () => {
             ))}
           </select>
         </div>
-
         <Pagination
           currentPage={currentPage}
           pageCount={pageCount}
