@@ -1,13 +1,13 @@
 export function TaskList({ tasks }) {
   return (
-    <ul>
-      {tasks.map((task) => {
-        return (
-          <li key={task.id}>
-            {task.taskName} 
-          </li>
-        );
-      })}
-    </ul>
+    <table className="task-table">
+      <tbody>
+        {tasks.map((task) => (
+          <tr key={task.id}>
+            <td>{task.taskName}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
