@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { API_TOKEN, API_URL, PAGE_SIZE_OPTIONS } from "../constants/constants";
+import { API_URL, API_TOKEN, PAGE_SIZE_OPTIONS } from "../constants/constants";
 import { TaskList } from "./task-list";
 import { Pagination } from "./pagination/pagination";
 
@@ -17,18 +17,22 @@ const Backlog = () => {
   function handlePageChanged(pageNumber) {
     setCurrentPage(pageNumber);
   }
+  
   useEffect(() => {
     const url = `${API_URL}/tasks?populate=categorie&filters[categorie][statusName][$eq]=Backlog&pagination[page]=${currentPage}&pagination[pageSize]=${pageSize}`;
-
-    fetch(url, {
-      headers: {
-        Authorization: `Bearer ${API_TOKEN}`,
-      },
-    })
-      .then((data) => data.json())
-      .then((jsonData) => {
+    
+    const fetchOptions = import.meta.env.PROD
+      ? { headers: { Authorization: `Bearer ${API_TOKEN}` } }
+      : {};
+    
+    fetch(url, fetchOptions)
+      .then(response => response.json())
+      .then(jsonData => {
         setTasks(jsonData.data || []);
         setPageCount(jsonData.meta?.pagination?.pageCount || 1);
+      })
+      .catch(err => {
+        console.error("Error fetching backlog tasks:", err);
       });
   }, [currentPage, pageSize]);
 

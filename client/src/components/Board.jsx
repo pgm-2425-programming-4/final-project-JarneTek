@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
 import Statusbox from "./Statusbox";
-import { API_TOKEN, API_URL } from "../constants/constants";
+import { API_URL, API_TOKEN } from "../constants/constants";
 
 const Board = () => {
   const [statuses, setStatuses] = useState([]);
 
   useEffect(() => {
-    fetch(`${API_URL}/statuses`, {
-      headers: {
-        Authorization: `Bearer ${API_TOKEN}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => setStatuses(data.data));
+    const fetchOptions = import.meta.env.PROD
+      ? { headers: { Authorization: `Bearer ${API_TOKEN}` } }
+      : {};
+      
+    fetch(`${API_URL}/statuses`, fetchOptions)
+      .then(response => response.json())
+      .then(data => {
+        setStatuses(data.data || []);
+      })
+      .catch(err => {
+        console.error("Error fetching statuses:", err);
+      });
   }, []);
+
   return (
     <div className="board">
       {statuses

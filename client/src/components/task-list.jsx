@@ -1,4 +1,12 @@
 export function TaskList({ tasks }) {
+  if (!tasks || tasks.length === 0) {
+    return (
+      <div className="task-list-empty">
+        <p>Geen taken beschikbaar.</p>
+      </div>
+    );
+  }
+
   return (
     <table className="task-table">
       <thead>
