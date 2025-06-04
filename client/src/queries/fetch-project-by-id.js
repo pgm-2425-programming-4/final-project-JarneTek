@@ -1,7 +1,12 @@
-import { API_URL } from "../constants/constants";
+import { API_URL, API_TOKEN } from "../constants/constants";
 
 export async function fetchProjectById(projectId) {
-  const response = await fetch(`${API_URL}/projects/${projectId}`);
+  const headers = {};
+  if (API_TOKEN) {
+    headers.Authorization = `Bearer ${API_TOKEN}`;
+  }
+
+  const response = await fetch(`${API_URL}/projects/${projectId}`, { headers });
   if (!response.ok) {
     throw new Error(
       `Failed to fetch project with id ${projectId}: ${response.status} ${response.statusText}`

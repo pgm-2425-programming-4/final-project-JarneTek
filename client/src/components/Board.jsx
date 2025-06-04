@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Statusbox from "./Statusbox";
-import { API_URL } from "../constants/constants";
+import { API_URL, API_TOKEN } from "../constants/constants";
 
 const Board = ({ tasks = [] }) => {
   const [statuses, setStatuses] = useState([]);
-    useEffect(() => {
-    fetch(`${API_URL}/statuses`)
+  
+  useEffect(() => {
+    const headers = {};
+    if (API_TOKEN) {
+      headers.Authorization = `Bearer ${API_TOKEN}`;
+    }
+
+    fetch(`${API_URL}/statuses`, { headers })
       .then(response => response.json())
       .then(data => setStatuses(data.data || []));
   }, []);
