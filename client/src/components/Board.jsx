@@ -4,9 +4,8 @@ import { API_URL } from "../constants/constants";
 
 const Board = ({ tasks = [] }) => {
   const [statuses, setStatuses] = useState([]);
-  
-  useEffect(() => {
-    fetch(`${API_URL}/api/statuses`)
+    useEffect(() => {
+    fetch(`${API_URL}/statuses`)
       .then(response => response.json())
       .then(data => setStatuses(data.data || []));
   }, []);
