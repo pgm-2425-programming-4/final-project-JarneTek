@@ -1,8 +1,8 @@
-export const PAGE_SIZE_OPTIONS = [5, 10, 25, 50];
-
 export const API_URL = import.meta.env.PROD
-  ? "https://final-project-jarnetek.onrender.com"
+  ? "https://final-project-jarnetek.onrender.com/api"
   : "http://localhost:1337";
+
+export const PAGE_SIZE_OPTIONS = [5, 10, 25, 50];
 
 // API Token is only needed for production environment
 // For local development, authentication is disabled
