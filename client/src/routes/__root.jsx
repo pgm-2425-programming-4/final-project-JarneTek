@@ -1,50 +1,36 @@
-import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import Sidebar from "../components/Sidebar";
 
 export const Route = createRootRoute({
-  component: RootComponent,
-});
-
-function RootComponent() {
-  return (
-    <div className="app">
-      <Sidebar />
-
-      <main className="main">
-        <header className="header">
-          <div className="header__content">
-            <div className="search">
+  component: () => (
+    <>
+      <div className="app">
+        <Sidebar />
+        <main className="main-content">
+          <header className="header">
+            <div className="search-container">
               <input
-                type="search"
+                type="text"
                 placeholder="Search tasks..."
-                className="search__input"
+                className="search-input"
               />
             </div>
-            <nav className="p-2 flex gap-2">
-              <Link to="/" className="[&.active]:font-bold page-nav-button">
-                Board
-              </Link>
-              <Link
-                to="/backlog"
-                className="[&.active]:font-bold page-nav-button"
-              >
-                Backlog
-              </Link>
+            <nav className="top-nav">
+              <ul className="nav-list">
+                <li className="nav-list__item">
+                  <button className="nav-list__button">Add Task</button>
+                </li>
+                <li className="nav-list__item">
+                  <button className="nav-list__button">New Project</button>
+                </li>
+              </ul>
             </nav>
-            <div className="header__actions">
-              <button className="button button--secondary">Add Task</button>
-              <button className="button button--primary">New Project</button>
-            </div>
-          </div>
-        </header>
-
-        <div className="page-content">
+          </header>
           <Outlet />
-        </div>
-      </main>
-
+        </main>
+      </div>
       <TanStackRouterDevtools />
-    </div>
-  );
-}
+    </>
+  ),
+});
