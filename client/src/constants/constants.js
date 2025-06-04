@@ -1,5 +1,5 @@
 export const API_URL = import.meta.env.PROD
-  ? "https://final-project-jarnetek.onrender.com/"
+  ? "https://final-project-jarnetek.onrender.com/api"
   : "http://localhost:1337/api";
 
 export const PAGE_SIZE_OPTIONS = [5, 10, 25, 50];
