@@ -10,11 +10,7 @@ export const Route = createRootRoute({
         <main className="main-content">
           <header className="header">
             <div className="search-container">
-              <input
-                type="text"
-                placeholder="Search tasks..."
-                className="search-input"
-              />
+              <input type="text" placeholder="Search tasks..." className="search-input" />
             </div>
             <nav className="top-nav">
               <ul className="nav-list">

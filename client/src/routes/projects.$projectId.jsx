@@ -1,8 +1,4 @@
-import {
-  createFileRoute,
-  Link,
-  Outlet,
-} from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { fetchProjectById } from "../queries/fetch-project-by-id";
 
 export const Route = createFileRoute("/projects/$projectId")({
@@ -23,18 +19,10 @@ function ProjectLayout() {
       <h1>{project.projectName}</h1>
 
       <nav className="project-nav">
-        <Link
-          to="/projects/$projectId"
-          params={{ projectId }}
-          className="nav-button"
-        >
+        <Link to="/projects/$projectId" params={{ projectId }} className="nav-button">
           Board
         </Link>
-        <Link
-          to="/projects/$projectId/backlog"
-          params={{ projectId }}
-          className="nav-button"
-        >
+        <Link to="/projects/$projectId/backlog" params={{ projectId }} className="nav-button">
           Backlog
         </Link>
       </nav>
