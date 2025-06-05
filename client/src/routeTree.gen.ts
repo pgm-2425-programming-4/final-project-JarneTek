@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as ProjectsProjectIdImport } from './routes/projects.$projectId'
 import { Route as ProjectsProjectIdIndexImport } from './routes/projects.$projectId.index'
+import { Route as ProjectsProjectIdBoardImport } from './routes/projects.$projectId.board'
 import { Route as ProjectsProjectIdBacklogImport } from './routes/projects.$projectId.backlog'
 
 // Create/Update Routes
@@ -26,6 +27,12 @@ const ProjectsProjectIdRoute = ProjectsProjectIdImport.update({
 const ProjectsProjectIdIndexRoute = ProjectsProjectIdIndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => ProjectsProjectIdRoute,
+} as any)
+
+const ProjectsProjectIdBoardRoute = ProjectsProjectIdBoardImport.update({
+  id: '/board',
+  path: '/board',
   getParentRoute: () => ProjectsProjectIdRoute,
 } as any)
 
@@ -53,6 +60,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsProjectIdBacklogImport
       parentRoute: typeof ProjectsProjectIdImport
     }
+    '/projects/$projectId/board': {
+      id: '/projects/$projectId/board'
+      path: '/board'
+      fullPath: '/projects/$projectId/board'
+      preLoaderRoute: typeof ProjectsProjectIdBoardImport
+      parentRoute: typeof ProjectsProjectIdImport
+    }
     '/projects/$projectId/': {
       id: '/projects/$projectId/'
       path: '/'
@@ -67,11 +81,13 @@ declare module '@tanstack/react-router' {
 
 interface ProjectsProjectIdRouteChildren {
   ProjectsProjectIdBacklogRoute: typeof ProjectsProjectIdBacklogRoute
+  ProjectsProjectIdBoardRoute: typeof ProjectsProjectIdBoardRoute
   ProjectsProjectIdIndexRoute: typeof ProjectsProjectIdIndexRoute
 }
 
 const ProjectsProjectIdRouteChildren: ProjectsProjectIdRouteChildren = {
   ProjectsProjectIdBacklogRoute: ProjectsProjectIdBacklogRoute,
+  ProjectsProjectIdBoardRoute: ProjectsProjectIdBoardRoute,
   ProjectsProjectIdIndexRoute: ProjectsProjectIdIndexRoute,
 }
 
@@ -81,11 +97,13 @@ const ProjectsProjectIdRouteWithChildren =
 export interface FileRoutesByFullPath {
   '/projects/$projectId': typeof ProjectsProjectIdRouteWithChildren
   '/projects/$projectId/backlog': typeof ProjectsProjectIdBacklogRoute
+  '/projects/$projectId/board': typeof ProjectsProjectIdBoardRoute
   '/projects/$projectId/': typeof ProjectsProjectIdIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/projects/$projectId/backlog': typeof ProjectsProjectIdBacklogRoute
+  '/projects/$projectId/board': typeof ProjectsProjectIdBoardRoute
   '/projects/$projectId': typeof ProjectsProjectIdIndexRoute
 }
 
@@ -93,6 +111,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/projects/$projectId': typeof ProjectsProjectIdRouteWithChildren
   '/projects/$projectId/backlog': typeof ProjectsProjectIdBacklogRoute
+  '/projects/$projectId/board': typeof ProjectsProjectIdBoardRoute
   '/projects/$projectId/': typeof ProjectsProjectIdIndexRoute
 }
 
@@ -101,13 +120,18 @@ export interface FileRouteTypes {
   fullPaths:
     | '/projects/$projectId'
     | '/projects/$projectId/backlog'
+    | '/projects/$projectId/board'
     | '/projects/$projectId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/projects/$projectId/backlog' | '/projects/$projectId'
+  to:
+    | '/projects/$projectId/backlog'
+    | '/projects/$projectId/board'
+    | '/projects/$projectId'
   id:
     | '__root__'
     | '/projects/$projectId'
     | '/projects/$projectId/backlog'
+    | '/projects/$projectId/board'
     | '/projects/$projectId/'
   fileRoutesById: FileRoutesById
 }
@@ -137,11 +161,16 @@ export const routeTree = rootRoute
       "filePath": "projects.$projectId.jsx",
       "children": [
         "/projects/$projectId/backlog",
+        "/projects/$projectId/board",
         "/projects/$projectId/"
       ]
     },
     "/projects/$projectId/backlog": {
       "filePath": "projects.$projectId.backlog.jsx",
+      "parent": "/projects/$projectId"
+    },
+    "/projects/$projectId/board": {
+      "filePath": "projects.$projectId.board.jsx",
       "parent": "/projects/$projectId"
     },
     "/projects/$projectId/": {

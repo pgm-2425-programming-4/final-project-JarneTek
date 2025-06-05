@@ -1,12 +1,13 @@
-import { createFileRoute, Link, Outlet, notFound } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  Outlet,
+} from "@tanstack/react-router";
 import { fetchProjectById } from "../queries/fetch-project-by-id";
 
 export const Route = createFileRoute("/projects/$projectId")({
   loader: async ({ params }) => {
     const data = await fetchProjectById(params.projectId);
-    if (!data || !data.data) {
-      throw notFound();
-    }
     return data.data;
   },
   component: ProjectLayout,
@@ -20,18 +21,18 @@ function ProjectLayout() {
   return (
     <div>
       <h1>{project.projectName}</h1>
-      
+
       <nav className="project-nav">
-        <Link 
-          to="/projects/$projectId" 
-          params={{ projectId }} 
+        <Link
+          to="/projects/$projectId"
+          params={{ projectId }}
           className="nav-button"
         >
           Board
         </Link>
-        <Link 
-          to="/projects/$projectId/backlog" 
-          params={{ projectId }} 
+        <Link
+          to="/projects/$projectId/backlog"
+          params={{ projectId }}
           className="nav-button"
         >
           Backlog

@@ -15,11 +15,7 @@ function ProjectBacklog() {
 
   return (
     <div className="backlog-container">
-      <Statusbox
-        status="Backlog"
-        statusId={null}
-        tasks={backlogTasks}
-      />
+      <Statusbox status="Backlog" statusId={null} tasks={backlogTasks} />
     </div>
   );
 }
