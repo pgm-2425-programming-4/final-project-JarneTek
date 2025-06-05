@@ -8,9 +8,7 @@ export async function fetchProjects() {
 
   const response = await fetch(`${API_URL}/projects`, { headers });
   if (!response.ok) {
-    throw new Error(
-      `Failed to fetch projects: ${response.status} ${response.statusText}`
-    );
+    throw new Error(`Failed to fetch projects: ${response.status} ${response.statusText}`);
   }
   return await response.json();
 }

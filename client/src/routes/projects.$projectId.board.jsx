@@ -10,7 +10,6 @@ export const Route = createFileRoute("/projects/$projectId/board")({
 function RouteComponent() {
   const tasksData = Route.useLoaderData();
   const tasks = tasksData.data || [];
-  const { projectId } = Route.useParams();
 
   return (
     <div className="project-detail">
