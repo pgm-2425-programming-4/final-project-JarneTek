@@ -11,62 +11,57 @@ export default function AddTaskForm() {
   const [statuses, setStatuses] = useState([]);
   const [selectedStatusId, setSelectedStatusId] = useState("");
   const [selectedLabel, setSelectedLabel] = useState("");
-
   useEffect(() => {
     fetchProjects().then((project) => {
-      setProjects(project.data), console.log(project);
+      setProjects(project.data);
     });
     fetchStatuses().then((status) => {
-      setStatuses(status.data), console.log(status);
+      setStatuses(status.data);
     });
-  }, []);  function handleSubmit(e) {
+  }, []);
+
+  function handleSubmit(e) {
     e.preventDefault();
-    
     if (!taskName) {
       alert("Taskname is needed");
-      return;
-    }
+    } else if (!selectedProjectId) {
+      alert("Selecteer een project");
+    } else {
+      // Prepare task data, only include fields that have values
+      const taskData = {
+        data: {
+          taskName: taskName,
+          project: parseInt(selectedProjectId),
+        },
+      };
 
-    // Prepare task data, only include fields that have values
-    const taskData = {
-      data: {
-        taskName: taskName,
+      // Add optional fields only if they have values
+      if (description) {
+        taskData.data.Description = description;
       }
-    };
 
-    // Add project only if selected (to test if this is causing the issue)
-    if (selectedProjectId) {
-      taskData.data.project = parseInt(selectedProjectId);
-    }
+      if (selectedStatusId) {
+        taskData.data.categorie = parseInt(selectedStatusId);
+      }
 
-    // Add optional fields only if they have values
-    if (description) {
-      taskData.data.Description = description;
-    }
-    
-    if (selectedStatusId) {
-      taskData.data.categorie = parseInt(selectedStatusId);
-    }
-    
-    if (selectedLabel) {
-      taskData.data.Labels = selectedLabel;
-    }
+      if (selectedLabel) {
+        taskData.data.Labels = selectedLabel;
+      }
 
-    console.log("Submitting task data:", taskData);
-
-    createTask(taskData)
-      .then((response) => {
-        console.log("Taak succesvol aangemaakt:", response);
-        setTaskName("");
-        setDescription("");
-        setSelectedProjectId("");
-        setSelectedStatusId("");
-        setSelectedLabel("");
-      })
-      .catch((error) => {
-        console.error("Fout bij het aanmaken van de taak:", error);
-        alert("Er ging iets mis bij het aanmaken van de taak.");
-      });
+      createTask(taskData)
+        .then((response) => {
+          console.log("Taak succesvol aangemaakt:", response);
+          setTaskName("");
+          setDescription("");
+          setSelectedProjectId("");
+          setSelectedStatusId("");
+          setSelectedLabel("");
+        })
+        .catch((error) => {
+          console.error("Fout bij het aanmaken van de taak:", error);
+          alert("Er ging iets mis bij het aanmaken van de taak.");
+        });
+    }
   }
 
   return (
@@ -95,10 +90,7 @@ export default function AddTaskForm() {
         </div>{" "}
         <div>
           <label>Project:</label>
-          <select
-            value={selectedProjectId}
-            onChange={(e) => setSelectedProjectId(e.target.value)}
-          >
+          <select value={selectedProjectId} onChange={(e) => setSelectedProjectId(e.target.value)}>
             <option value="">-- Selecteer een project --</option>
             {projects.map((project) => (
               <option key={project.id} value={project.id}>
@@ -109,10 +101,7 @@ export default function AddTaskForm() {
         </div>{" "}
         <div>
           <label>Status:</label>
-          <select
-            value={selectedStatusId}
-            onChange={(e) => setSelectedStatusId(e.target.value)}
-          >
+          <select value={selectedStatusId} onChange={(e) => setSelectedStatusId(e.target.value)}>
             <option value="">-- Selecteer een status --</option>
             {statuses.map((status) => (
               <option key={status.id} value={status.id}>
@@ -124,10 +113,7 @@ export default function AddTaskForm() {
         {/* Label - optioneel */}
         <div>
           <label>Label:</label>
-          <select
-            value={selectedLabel}
-            onChange={(e) => setSelectedLabel(e.target.value)}
-          >
+          <select value={selectedLabel} onChange={(e) => setSelectedLabel(e.target.value)}>
             <option value="">-- Kies een label (optioneel) --</option>
             <option value="Infra">Infra</option>
             <option value="Documentation">Documentatie</option>
