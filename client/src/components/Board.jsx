@@ -25,7 +25,9 @@ const Board = ({ tasks = [] }) => {
             key={status.id}
             status={status.statusName}
             statusId={status.id}
-            tasks={tasks.filter((task) => task.categorie?.id === status.id) || []}
+            tasks={
+              tasks.filter((task) => task.categorie?.id === status.id) || []
+            }
           />
         ))}
     </div>
