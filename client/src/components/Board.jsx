@@ -4,7 +4,7 @@ import { API_URL, API_TOKEN } from "../constants/constants";
 
 const Board = ({ tasks = [] }) => {
   const [statuses, setStatuses] = useState([]);
-  
+
   useEffect(() => {
     const headers = {};
     if (API_TOKEN) {
@@ -12,20 +12,22 @@ const Board = ({ tasks = [] }) => {
     }
 
     fetch(`${API_URL}/statuses`, { headers })
-      .then(response => response.json())
-      .then(data => setStatuses(data.data || []));
+      .then((response) => response.json())
+      .then((data) => setStatuses(data.data || []));
   }, []);
 
   return (
     <div className="board">
       {statuses
-        .filter(status => status.statusName !== "Backlog")
-        .map(status => (
+        .filter((status) => status.statusName !== "Backlog")
+        .map((status) => (
           <Statusbox
             key={status.id}
             status={status.statusName}
             statusId={status.id}
-            tasks={tasks.filter(task => task.categorie?.id === status.id) || []}
+            tasks={
+              tasks.filter((task) => task.categorie?.id === status.id) || []
+            }
           />
         ))}
     </div>
