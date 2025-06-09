@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createTask } from "../queries/create-task";
 import { fetchProjects } from "../queries/fetch-projects";
 import { fetchStatuses } from "../queries/fetch-statuses";
+import { testAPIConnection } from "../utils/test-api";
 
 export default function AddTaskForm() {
   const [taskName, setTaskName] = useState("");
@@ -20,23 +21,37 @@ export default function AddTaskForm() {
       setStatuses(status.data), console.log(status);
     });
   }, []);
-
   function handleSubmit(e) {
     e.preventDefault();
     if (!taskName) {
       alert("Taskname is needed");
     } else if (!selectedProjectId) {
       alert("Selecteer een project");
-    } else {
-      createTask({
+    } else {      // Prepare task data, only include fields that have values
+      const taskData = {
         data: {
           taskName: taskName,
-          Description: description,
           project: parseInt(selectedProjectId),
-          categorie: parseInt(selectedStatusId),
-          Labels: selectedLabel,
-        },
-      })
+          publishedAt: new Date(), // Explicitly publish the task
+        }
+      };
+
+      // Add optional fields only if they have values
+      if (description) {
+        taskData.data.Description = description;
+      }
+      
+      if (selectedStatusId) {
+        taskData.data.categorie = parseInt(selectedStatusId);
+      }
+      
+      if (selectedLabel) {
+        taskData.data.Labels = selectedLabel;
+      }
+
+      console.log("Submitting task data:", taskData);
+
+      createTask(taskData)
         .then((response) => {
           console.log("Taak succesvol aangemaakt:", response);
           setTaskName("");
