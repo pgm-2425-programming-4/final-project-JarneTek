@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { createTask } from "../queries/create-task";
 import { fetchProjects } from "../queries/fetch-projects";
 import { fetchStatuses } from "../queries/fetch-statuses";
-import { testAPIConnection } from "../utils/test-api";
 
 export default function AddTaskForm() {
   const [taskName, setTaskName] = useState("");
@@ -20,51 +19,54 @@ export default function AddTaskForm() {
     fetchStatuses().then((status) => {
       setStatuses(status.data), console.log(status);
     });
-  }, []);
-  function handleSubmit(e) {
+  }, []);  function handleSubmit(e) {
     e.preventDefault();
+    
     if (!taskName) {
       alert("Taskname is needed");
-    } else if (!selectedProjectId) {
-      alert("Selecteer een project");
-    } else {      // Prepare task data, only include fields that have values
-      const taskData = {
-        data: {
-          taskName: taskName,
-          project: parseInt(selectedProjectId),
-          publishedAt: new Date(), // Explicitly publish the task
-        }
-      };
-
-      // Add optional fields only if they have values
-      if (description) {
-        taskData.data.Description = description;
-      }
-      
-      if (selectedStatusId) {
-        taskData.data.categorie = parseInt(selectedStatusId);
-      }
-      
-      if (selectedLabel) {
-        taskData.data.Labels = selectedLabel;
-      }
-
-      console.log("Submitting task data:", taskData);
-
-      createTask(taskData)
-        .then((response) => {
-          console.log("Taak succesvol aangemaakt:", response);
-          setTaskName("");
-          setDescription("");
-          setSelectedProjectId("");
-          setSelectedStatusId("");
-          setSelectedLabel("");
-        })
-        .catch((error) => {
-          console.error("Fout bij het aanmaken van de taak:", error);
-          alert("Er ging iets mis bij het aanmaken van de taak.");
-        });
+      return;
     }
+
+    // Prepare task data, only include fields that have values
+    const taskData = {
+      data: {
+        taskName: taskName,
+      }
+    };
+
+    // Add project only if selected (to test if this is causing the issue)
+    if (selectedProjectId) {
+      taskData.data.project = parseInt(selectedProjectId);
+    }
+
+    // Add optional fields only if they have values
+    if (description) {
+      taskData.data.Description = description;
+    }
+    
+    if (selectedStatusId) {
+      taskData.data.categorie = parseInt(selectedStatusId);
+    }
+    
+    if (selectedLabel) {
+      taskData.data.Labels = selectedLabel;
+    }
+
+    console.log("Submitting task data:", taskData);
+
+    createTask(taskData)
+      .then((response) => {
+        console.log("Taak succesvol aangemaakt:", response);
+        setTaskName("");
+        setDescription("");
+        setSelectedProjectId("");
+        setSelectedStatusId("");
+        setSelectedLabel("");
+      })
+      .catch((error) => {
+        console.error("Fout bij het aanmaken van de taak:", error);
+        alert("Er ging iets mis bij het aanmaken van de taak.");
+      });
   }
 
   return (

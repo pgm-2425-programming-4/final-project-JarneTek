@@ -13,9 +13,7 @@ export async function createTask(taskData) {
 
   console.log("Sending request to:", `${API_URL}/tasks`);
   console.log("Request headers:", headers);
-  console.log("Request body:", JSON.stringify(taskData, null, 2));
-
-  const response = await fetch(`${API_URL}/tasks`, {
+  console.log("Request body:", JSON.stringify(taskData, null, 2));  const response = await fetch(`${API_URL}/tasks`, {
     method: "POST",
     headers,
     body: JSON.stringify(taskData),
