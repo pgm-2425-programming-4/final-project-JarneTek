@@ -1,21 +1,29 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { fetchBacklogTasksByProject } from "../queries/fetch-backlog-tasks-by-project";
 import { TaskList } from "../components/task-list";
 
 export const Route = createFileRoute("/projects/$projectId/backlog")({
-  loader: ({ params }) => {
-    return fetchBacklogTasksByProject(params.projectId);
-  },
   component: ProjectBacklog,
 });
 
 function ProjectBacklog() {
-  const backlogData = Route.useLoaderData();
-  const backlogTasks = backlogData.data || [];
+  const { projectId } = Route.useParams();
+  const [backlogTasks, setBacklogTasks] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);  const [pageSize, setPageSize] = useState(10);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const loadBacklogTasks = useCallback(async () => {
+    try {
+      const backlogData = await fetchBacklogTasksByProject(projectId);
+      setBacklogTasks(backlogData.data || []);
+    } catch {
+      // Error handling
+    }
+  }, [projectId]);
+
+  useEffect(() => {
+    loadBacklogTasks();
+  }, [projectId, loadBacklogTasks]);
 
   const totalPages = Math.ceil(backlogTasks.length / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
@@ -41,7 +49,7 @@ function ProjectBacklog() {
             </select>
           </div>
 
-          <TaskList tasks={currentTasks} />
+          <TaskList tasks={currentTasks} onTaskUpdate={loadBacklogTasks} />
 
           {totalPages > 1 && (
             <div>

@@ -1,9 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Statusbox from "./Statusbox";
 import { API_URL, API_TOKEN } from "../constants/constants";
+import { fetchTasksByProject } from "../queries/fetch-tasks-by-project";
 
-const Board = ({ tasks = [] }) => {
+const Board = ({ projectId }) => {
   const [statuses, setStatuses] = useState([]);
+  const [tasks, setTasks] = useState([]);
+
+  const loadTasks = useCallback(async () => {
+    try {
+      const tasksData = await fetchTasksByProject(projectId);
+      setTasks(tasksData.data || []);
+    } catch {
+      // Error handling
+    }
+  }, [projectId]);
 
   useEffect(() => {
     const headers = {};
@@ -14,7 +25,9 @@ const Board = ({ tasks = [] }) => {
     fetch(`${API_URL}/statuses`, { headers })
       .then((response) => response.json())
       .then((data) => setStatuses(data.data || []));
-  }, []);
+
+    loadTasks();
+  }, [projectId, loadTasks]);
 
   return (
     <div className="board">
@@ -26,6 +39,7 @@ const Board = ({ tasks = [] }) => {
             status={status.statusName}
             statusId={status.id}
             tasks={tasks.filter((task) => task.categorie?.id === status.id) || []}
+            onTaskUpdate={loadTasks}
           />
         ))}
     </div>

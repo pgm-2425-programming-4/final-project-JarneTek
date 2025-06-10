@@ -1,12 +1,9 @@
 import { API_URL, API_TOKEN } from "../constants/constants";
 
-// Functie om alle statussen op te halen
 export async function fetchStatuses() {
   const headers = {
-    "Content-Type": "application/json",
   };
 
-  // Voeg API token toe als deze bestaat
   if (API_TOKEN) {
     headers.Authorization = `Bearer ${API_TOKEN}`;
   }

@@ -1,19 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { fetchTasksByProject } from "../queries/fetch-tasks-by-project";
-import Board from "../components/Board";
+import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute("/projects/$projectId/board")({
-  loader: ({ params }) => fetchTasksByProject(params.projectId),
+export const Route = createFileRoute('/projects/$projectId/board')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
-  const tasksData = Route.useLoaderData();
-  const tasks = tasksData.data || [];
-
-  return (
-    <div className="project-detail">
-      <Board tasks={tasks} />
-    </div>
-  );
+  return <div>Hello "/projects/$projectId/board"!</div>
 }
