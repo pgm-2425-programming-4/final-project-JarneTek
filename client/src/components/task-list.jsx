@@ -16,7 +16,10 @@ export function TaskList({ tasks, onTaskUpdate }) {
       const taskData = {
         data: {
           categorie: parseInt(newStatusId),
-        },      };      await updateStatus(taskDocumentId, taskData);      if (onTaskUpdate) {
+        },
+      };
+      await updateStatus(taskDocumentId, taskData);
+      if (onTaskUpdate) {
         onTaskUpdate();
       }
     } catch {

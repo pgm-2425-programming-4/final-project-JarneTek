@@ -10,7 +10,8 @@ export const Route = createFileRoute("/projects/$projectId/backlog")({
 function ProjectBacklog() {
   const { projectId } = Route.useParams();
   const [backlogTasks, setBacklogTasks] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);  const [pageSize, setPageSize] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
 
   const loadBacklogTasks = useCallback(async () => {
     try {
