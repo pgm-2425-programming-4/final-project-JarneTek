@@ -9,9 +9,7 @@ export const Route = createRootRoute({
         <Sidebar />
         <main className="main-content">
           <header className="header">
-            <div className="search-container">
-              <input type="text" placeholder="Search tasks..." className="search-input" />
-            </div>
+            <h2>Task Management System</h2>
           </header>
           <Outlet />
         </main>

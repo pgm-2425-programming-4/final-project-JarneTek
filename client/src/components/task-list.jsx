@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { updateStatus } from "../queries/update-task";
 import { fetchStatuses } from "../queries/fetch-statuses";
 
-export function TaskList({ tasks, onTaskUpdate }) {
+export function TaskList({ tasks, onTaskUpdate, onTaskClick }) {
   const [statuses, setStatuses] = useState([]);
 
   useEffect(() => {
@@ -49,16 +49,21 @@ export function TaskList({ tasks, onTaskUpdate }) {
             <strong>Status</strong>
           </td>
         </tr>
-      </thead>
+      </thead>{" "}
       <tbody>
         {tasks.map((task) => (
-          <tr key={task.id}>
+          <tr
+            key={task.id}
+            onClick={() => onTaskClick && onTaskClick(task)}
+            style={{ cursor: "pointer" }}
+          >
             <td>{task.taskName}</td>
             <td>{task.Labels && <span className="tag">{task.Labels}</span>}</td>
             <td>
               <select
                 value={task.categorie?.id || ""}
                 onChange={(e) => handleStatusChange(task.documentId, e.target.value)}
+                onClick={(e) => e.stopPropagation()}
               >
                 <option value="">-- Kies status --</option>
                 {statuses.map((status) => (

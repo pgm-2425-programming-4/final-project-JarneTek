@@ -63,15 +63,16 @@ export default function AddTaskForm() {
         });
     }
   }
-
   return (
-    <div>
+    <div className="add-task-form">
       <h2>Nieuwe Taak Toevoegen</h2>
 
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Taak Naam:</label>
+        <div className="form-group">
+          <label htmlFor="taskName">Taak Naam:</label>
           <input
+            id="taskName"
+            className="form-input"
             onChange={(e) => setTaskName(e.target.value)}
             value={taskName}
             type="text"
@@ -79,18 +80,27 @@ export default function AddTaskForm() {
             required
           />
         </div>
-        <div>
-          <label>Beschrijving:</label>
+
+        <div className="form-group form-group--optional">
+          <label htmlFor="description">Beschrijving:</label>
           <textarea
-            placeholder="Meer details over de taak... (optioneel)"
+            id="description"
+            className="form-textarea"
+            placeholder="Meer details over de taak..."
             rows="3"
             onChange={(e) => setDescription(e.target.value)}
             value={description}
           />
-        </div>{" "}
-        <div>
-          <label>Project:</label>
-          <select value={selectedProjectId} onChange={(e) => setSelectedProjectId(e.target.value)}>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="project">Project:</label>
+          <select
+            id="project"
+            className="form-select"
+            value={selectedProjectId}
+            onChange={(e) => setSelectedProjectId(e.target.value)}
+          >
             <option value="">-- Selecteer een project --</option>
             {projects.map((project) => (
               <option key={project.id} value={project.id}>
@@ -98,10 +108,16 @@ export default function AddTaskForm() {
               </option>
             ))}
           </select>
-        </div>{" "}
-        <div>
-          <label>Status:</label>
-          <select value={selectedStatusId} onChange={(e) => setSelectedStatusId(e.target.value)}>
+        </div>
+
+        <div className="form-group form-group--optional">
+          <label htmlFor="status">Status:</label>
+          <select
+            id="status"
+            className="form-select"
+            value={selectedStatusId}
+            onChange={(e) => setSelectedStatusId(e.target.value)}
+          >
             <option value="">-- Selecteer een status --</option>
             {statuses.map((status) => (
               <option key={status.id} value={status.id}>
@@ -109,18 +125,26 @@ export default function AddTaskForm() {
               </option>
             ))}
           </select>
-        </div>{" "}
-        {/* Label - optioneel */}
-        <div>
-          <label>Label:</label>
-          <select value={selectedLabel} onChange={(e) => setSelectedLabel(e.target.value)}>
-            <option value="">-- Kies een label (optioneel) --</option>
+        </div>
+
+        <div className="form-group form-group--optional">
+          <label htmlFor="label">Label:</label>
+          <select
+            id="label"
+            className="form-select"
+            value={selectedLabel}
+            onChange={(e) => setSelectedLabel(e.target.value)}
+          >
+            <option value="">-- Kies een label --</option>
             <option value="Infra">Infra</option>
             <option value="Documentation">Documentatie</option>
             <option value="Back-end">Back-end</option>
           </select>
-        </div>{" "}
-        <button type="submit">Taak Aanmaken</button>
+        </div>
+
+        <button type="submit" className="form-button">
+          Taak Aanmaken
+        </button>
       </form>
     </div>
   );
