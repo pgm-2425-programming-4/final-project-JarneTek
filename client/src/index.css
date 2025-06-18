@@ -545,6 +545,41 @@ select:focus,
   border-radius: var(--border-radius);
 }
 
+/* 404 Not Found */
+.not-found {
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  margin: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.not-found h1 {
+  margin-bottom: 1rem;
+  color: var(--color-text);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.not-found p {
+  margin-bottom: 1.5rem;
+  color: #64748b;
+  font-size: 1rem;
+}
+
+.not-found-link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.not-found-link:hover {
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+
 /* Responsive design */
 @media (max-width: 1200px) {
   .board {

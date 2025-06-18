@@ -1,10 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useCallback } from "react";
 import { fetchBacklogTasksByProject } from "../queries/fetch-backlog-tasks-by-project";
 import { fetchProjectById } from "../queries/fetch-project-by-id";
 import { TaskList } from "../components/task-list";
 import TaskDetailDialog from "../components/TaskDetailDialog";
 import Pagination from "../components/Pagination";
+import ProjectHeader from "../components/ProjectHeader";
 
 export const Route = createFileRoute("/projects/$projectId/backlog")({
   loader: async ({ params }) => {
@@ -55,21 +56,9 @@ function ProjectBacklog() {
   const totalPages = Math.ceil(backlogTasks.length / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
   const currentTasks = filteredBacklogTasks.slice(startIndex, startIndex + pageSize);
-
   return (
     <div className="backlog-page">
-      <h1>{project.projectName}</h1>
-      <nav className="project-nav">
-        <Link to="/projects/$projectId" params={{ projectId }} className="nav-button">
-          Board
-        </Link>
-        <Link to="/projects/$projectId/backlog" params={{ projectId }} className="nav-button">
-          Backlog
-        </Link>
-        <Link to="/" className="nav-button nav-button--primary">
-          + Nieuwe Task
-        </Link>
-      </nav>
+      <ProjectHeader project={project} projectId={projectId} />
       <div className="task-search-container">
         <input
           className="task-search-input"

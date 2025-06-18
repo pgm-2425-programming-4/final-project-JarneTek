@@ -34,7 +34,6 @@ export function TaskList({ tasks, onTaskUpdate, onTaskClick }) {
       </div>
     );
   }
-
   return (
     <table className="task-table">
       <thead>
@@ -49,7 +48,7 @@ export function TaskList({ tasks, onTaskUpdate, onTaskClick }) {
             <strong>Status</strong>
           </td>
         </tr>
-      </thead>{" "}
+      </thead>
       <tbody>
         {tasks.map((task) => (
           <tr

@@ -17,4 +17,13 @@ export const Route = createRootRoute({
       <TanStackRouterDevtools />
     </>
   ),
+  notFoundComponent: () => (
+    <div className="not-found">
+      <h1>404 - Pagina niet gevonden</h1>
+      <p>De pagina die je zoekt bestaat niet.</p>
+      <Link to="/" className="not-found-link">
+        Ga terug naar home
+      </Link>
+    </div>
+  ),
 });
